@@ -323,199 +323,24 @@
       
         
           
-            <h1 id="3-字符串、向量和数组"><a href="#3-字符串、向量和数组" class="headerlink" title="3.字符串、向量和数组"></a>3.字符串、向量和数组</h1><p><strong>3**</strong>字符串、向量和数组**</p>
-<p><strong>3.1命名空间的using声明</strong></p>
-<p>Using std::cin;</p>
-<p>Using namespace std;</p>
-<p>或者直接用std::cout</p>
-<p>注意：头文件不应包含using声明。</p>
-<p><strong>3.2string</strong></p>
-<p><strong>初始化</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e018e7d145897462.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>使用“=”是拷贝初始化，不适用符号是直接初始化</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-557813cbabaca218.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>String：：size_type：string定义的一种类型，具体类型未知，可以通过auto或者decltype推断。</p>
-<p>String的比较先比较长度，长度相同，则比较第一个相异的元素的字典序。</p>
-<p>String可以直接使用+，但必须+号两边必须有一个为string类型，也可以与“字符”直接相加。</p>
-<p><strong>处理string中字符</strong></p>
-<p>Cctype头文件中</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1e6980f5bfcd316b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>可以通过for语句遍历或者下标访问，但是下标访问注意是否在string范围内。</p>
-<p><strong>3.3vector</strong></p>
-<p><strong>初始化</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0ce4935c5e2c0d18.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>两种例外情况:其一，使用拷贝初始化(即使用=时)，只能提供个初始值：其二，如果提供的是个类内初始值,则只能使用拷贝初始化或使用花括号的形式初始化。第三种特殊的要求是，如果提供的是初始元素值的列表，则只能把初始值都放在花括号里进行列表初始化，而不能放在圆括号里：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5dce07cfd6c5f9d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>可以采用列表初始化{“”， “”， “”}</p>
-<p><strong>添加元素</strong></p>
-<p>Push_back在向量末尾增加一个元素，不需要提前初始化空间。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-61f501d7508e578b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>Vector也可以for语句，下标访问。</p>
-<p><strong>3.4迭代器介绍</strong></p>
-<p>Begin指向第一个元素，end（尾后迭代器）自相最后元素的下一个位置。</p>
-<p>运算符一般使用==和！=；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8ecae61105346647.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>迭代器的类型有const_iterator（可读）和iterator（可读写）。</p>
-<p>Cbegin和cend是返回头尾迭代器，返回值都是const_iterator；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-94a53a042a2b75e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>3.5数组</strong></p>
-<p>与vector不同的地方，数组的大小确定不变，不能随意向数组中增加元素。</p>
-<p>如果不清楚元素的确切个数，请使用vector。</p>
-<p><strong>初始化</strong></p>
-<p>维度必须是一个常量表达式。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-77db4a0bfb250775.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>字符数组的特殊性：字符串结尾处还有一个空字符，也会拷贝到字符数组中去。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-03a8faaf9ab5bbe1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>不允许拷贝和赋值。</p>
-<p><strong>下标访问</strong></p>
-<p>For语句，访问数组下标一般定义为size_t类型，但不能超过其size。</p>
-<p><strong>指针和数组</strong></p>
-<p>顺组名即指针，使用数组的时候编译器一般会把它转换成指针。</p>
-<p>指针也是迭代器，可用begin（）和end（）得到数组的头尾。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-72c9827f1f903a20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>给一个指针加上（减去）某整数值，结果仍是指针。新指针指向的元素与原来的指针相比前进了（后退了）给整数值个位置。</p>
-<p>解引用和指针运算的交换：指针加上一个整数所得的结果还是一个指针。假设结果指针指向了一个元素，则允许解引用该结果指针：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4e025edaae43e469.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>指针指向的是数组中的元素（或者数组中尾元素的下一位置）；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b1e9da3838765885.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>使用数组的时候其实真正用的是指向数组首元素的指针。</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-47930bc2e4764694.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>3.6多维数组</strong></p>
-<p>数组的数组（由内向外的顺序阅读）</p>
-<p>一个维度表示数组本身大小，另外一个维度表示其元素（也是数组）大小；</p>
-<p>For语句循环时，如果要改变值的大小用&amp;；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f9e0b4beaeec368c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b8e3bbec8cc5c6c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
+          3.字符串、向量和数组3**字符串、向量和数组**
+3.1命名空间的using声明
+Using std::cin;
+Using namespace std;
+或者直接用std::cout
+注意：头文件不应包含using声明。
+3.2string
+初始化
   
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wuyang51.space/guigui51.github.io/2018/09/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="龟龟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/guigui51.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="龟龟的搬砖之路">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/guigui51.github.io/2018/09/01/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-01T20:22:19+08:00">
-                2018-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+使用“=”是拷贝初始化，不适用符号是直接
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/3-字符串、向量和数组/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -599,7 +424,7 @@
               
                 <a href="/guigui51.github.io/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

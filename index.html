@@ -323,126 +323,22 @@
       
         
           
-            <h1 id="16模板与泛形编程"><a href="#16模板与泛形编程" class="headerlink" title="16模板与泛形编程"></a>16模板与泛形编程</h1><p><strong>16模板与泛形编程</strong></p>
-<p>Oop能处理类型在程序运行之前都位置的情况；而在泛形编程中，在编译时就能获知类型了。</p>
-<p><strong>16.1定义模板</strong></p>
-<p><strong>16.1.1函数模板</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8a4c59b41e3b4b4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>模板参数列表中，每一个参数都要加上关键字typename或者class</p>
-<p><strong>非类型模板参数</strong></p>
-<p>表示一个值而非一个类型，必须是常量表达式，可以是一个整形或者是指向对象或函数类型的指针或（左值）引用。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5d6261c110f8e2cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>Inline和constexpr必须在模板参数列表之后，返回类型之前。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-dfb8051739fdb0d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5b006c81ff1f1551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>模板编译</strong></p>
-<p>当编译器遇到一个模板定义时，它并不生成代码。只有在实例化末班的一个特定版本是编译器才会生成代码。</p>
-<p>函数模板和类模板成员函数的定义通常放在头文件。</p>
-<p><strong>大多数编译错误在实例化期间报告</strong></p>
-<p>编译器在三个阶段报告错误</p>
-<p>（1）编译模板本身</p>
-<p>（2）编译器遇到模板使用时</p>
-<p>（3）模板实例化</p>
-<p><strong>16.1.2类模板</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-efee98572a836b81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>类模板的成员函数</strong></p>
-<p>我们既可以在类模板内部，也可以在类模板外部为其定义成员函数，类模板内定义的函数被隐式声明为内联函数。</p>
-<p><strong>类模板成员函数的实例化</strong></p>
-<p>一个类模板的成员函数只有当程序用到它是才进行实例化。</p>
-<p><strong>在类代码内简化模板类名的使用</strong></p>
-<p>在类模板自己的作用域中，可以直接使用模板名而且不提供实参。</p>
-<p><strong>模板类型别名</strong></p>
-<p>定义一个模板类型别名是，可以固定一个或多个模板参数。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-61ae7b3f0f95ea9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>类模板的**</strong>static成员**</p>
-<p>相同类型的模板类只有一个相同名字static的值</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a83effd73b5b0ea7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.1.3模板参数</strong></p>
-<p>一个模板参数名的可用范围是在其声明之后，至模板声明或定义结束之前、模板参数会隐藏外层作用域中声明的相同名字。模板内不能重用模板参数名，所以一个模板参数名在一个特定模板参数列表中只能出现一次。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a637296d71c6d967.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f8460d9327f17030.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>默认模板实参</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1932fa804051bde5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>形参都有默认实参时，模板参数列表才能有默认实参。</p>
-<p><strong>模板默认实参与类模板</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7a6af94df184c5b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.1.4成员模板</strong></p>
-<p>一个类（无论是普通类还是类模板）可以包含本身是模板的成员函数。称为成员模板，不能为虚函数。</p>
-<p><strong>类模板的成员模板</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8e501088a590df82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.1.5控制实例化</strong></p>
-<p>显示实例化</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b2fae2f0ae0115b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e8a7585e863c4b47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.2模板实参推断</strong></p>
-<p>从函数实参来确定模板实参的过程</p>
-<p><strong>16.2.1类型转换与模板类型参数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-38e2b600c68af3b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.2.2函数模板显式实参</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ce3c280a24ae191a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>必须顺序是对，才能推断出。</p>
-<p>如果显式的指定模板类型参数，就可以进行正常类型转换了。</p>
-<p><strong>16.2.4函数指针和实参推断</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d6e002cac8d889fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.2.5模板实参推断和引用</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7692cea87e3be096.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>从左值引用函数参数推断类型</strong></p>
-<p>模板类型参数一个普通（左值）引用只能传递给它一个左值（如一个变量或一个返回引用类型的表达式）</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-25085cf4baaaaaab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>引用折叠和右值引用参数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-663e7abbf7cf781c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-41ae2792bee2549f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4697ff8aba516f41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-801f99f1068b330d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>编写接受右值引用参数的模板参数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-28b4185585a3f7c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-223a70bf0cedd834.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>拷贝还是绑定一个引用？</p>
-<p>根据传入实参来确定是拷贝还是引用，传入左值是引用，右值则拷贝。</p>
-<p>右值引用通常用于模板转发或模板被重载。</p>
-<p><strong>16.2.6理解std：：move（不理解）</strong></p>
-<p><strong>从一个左值static_cast到一个右值引用是允许的</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e8508513ede1c9c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.2.7转发</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2b513df24819475c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>定义能保持类型信息的函数参数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c7e7efe9d549532b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ec2a6fc9bace1244.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>在调用中使用std：：forward保持类型信息</p>
-<p>头文件utility中，forward返回该显式实参类型的右值引用，即，forward的返回类型是T&amp;&amp;。</p>
-<p><strong>16.3重载与模板</strong></p>
-<p>匹配规则：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-598b5220fedd2fa1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7d55631d7e4f5b5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cc7e6a539f0060d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.4可变参数模板</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5f30642d2314b5ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c0a41ef0f0712f3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cf87e054dce12e47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>可以通过sizeof知道包的大小。</p>
-<p><strong>16.4.1编写可变参数函数模板</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2781f30895d361c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.4.2包扩展</strong></p>
-<p>让扩展包中的元素作为单个元素供其他函数调用。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-29f93c755054a32f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-316b0da8184cc994.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c1c033c0e159e611.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.4.3转发参数包</strong></p>
-<p>使用forward来保持实参的原始类型</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f753c88918188d4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>16.5模板特例化</strong></p>
-<p>一个特例化版本就是模板的一个独立定义，在其中一个或多个模板参数被指定为特定的类型。</p>
-<p><strong>定义函数模板特例化</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7e4dbe61817eb581.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>一个特例化版本本质上是一个实例，而非函数名的一个重载版本。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-80d2ede5e28300fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a9e457e1b78b8f88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>类似其他任何类，可以在类内或类外定义特例化版本的成员。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ac0c692ea9afca63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9013fe8c0a2de70d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>���������������%+��”</p>
-
-          
+          16模板与泛形编程16模板与泛形编程
+Oop能处理类型在程序运行之前都位置的情况；而在泛形编程中，在编译时就能获知类型了。
+16.1定义模板
+16.1.1函数模板
+  
+模板参数列表中，每一个参数都要加上关键字typename或者class
+非类型模板参数
+表示一个值而非一个类型，必须是常量表达式，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/16模板与泛形编程/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -560,125 +456,24 @@
       
         
           
-            <h1 id="15面向对象程序设计"><a href="#15面向对象程序设计" class="headerlink" title="15面向对象程序设计"></a>15面向对象程序设计</h1><p><strong>15面向对象程序设计</strong></p>
-<p>三个基本概念：数据抽象、继承和动态绑定。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9a225e6c287a88e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.1oop：概述</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c66cf71ef85616e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b74d2836daec9991.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>虚函数virtual：不继承基类，基类有，希望派生类定义自身的版本。为了显示表明派生类改写了基类的虚函数在该函数的形参之后增加一个override。</p>
-<p>派生列表：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6d667768df6e4683.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>动态绑定：根据实参选择合适的函数版本（基类还是派生类的）进行执行，又称运行时绑定。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-bcd184999aa223b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.2定义基类和派生类</strong></p>
-<p><strong>15.2.1定义基类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-51267b52e0c5ff54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-df2f1019a9942082.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>前者定义为虚函数，</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-26c4fc3dfcca0560.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-594cf895ec12446b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1d0e33e2abf60cb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>派生类的其他用户是不能访问受保护的，只能派生类自己能够访问。</p>
-<p><strong>15.2.2定义派生类</strong></p>
-<p>派生列表，表明从哪继承，访问说明符是什么。访问说明符控制派生类从基类继承而来的成员是否对派生类的用户可见。</p>
-<p>单继承。</p>
-<p>通过在形参后增加override来表明覆盖基类的哪个虚函数。</p>
-<p><strong>派生类对象及派生类向基类的类型转换</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d1034141dddee434.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f8f591341d0ea69c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>城派生类到基类的类型转换。</p>
-<p><strong>派生类构造函数</strong></p>
-<p>基类中有的成员使用基类的构造函数初始化，派生类的自己初始化</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-aca0890eddbe32e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0497213021d5e06f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ff5db83ec82cc471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-06204c36277e56f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>被用作基类的类</strong></p>
-<p>必须依据定义而非仅声明；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-46a899e5cbe3605c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>一个类可以是基类也可以是派生类。</p>
-<p><strong>防止继承的发生**</strong>final**</p>
-<p>在类名后加一个final。</p>
-<p><strong>15.2.3类型转换与继承</strong></p>
-<p>基类的指针或引用绑定到派生类对象上</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b0cb4ac025fccd3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>静态类型和动态类型</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9da1b4a4a8a4bd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c304c9dac450f901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>在对象之间不存在类型转换</strong></p>
-<p>派生类向基类的自动类型转换只对指针或引用类型有效，在派生类类型和基类类型之中不存在这样的转换。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8ff211f3fa8b8e0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.3虚函数</strong></p>
-<p>使用基类的引用或指针调用一个虚成员函数时会执行动态绑定，所有虚函数都必须定义。必须为每一个虚函数提供定义，而不管它是否被用到了，因为编译器也无法确定到底会使用哪个虚函数。</p>
-<p><strong>对虚函数的调用可能在运行是才被解析</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-dc55c99d2ff20aff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>派生类中虚函数</strong></p>
-<p>Virtual，一旦某个函数被声明成虚函数，则在所以的派生类中它都是虚函数。派生类中虚函数的形参必须与基类一致；返回类型也必须一致，例外情况：返回类型是类本身的指针或引用时。</p>
-<p><strong>Final和override</strong></p>
-<p>派生类定义了一个函数与基类虚函数名字相同但是形参列表不同，这是合法的，两个函数是相互独立的。</p>
-<p>将某个函数指定为final（也可以用于函数），之后任何尝试覆盖该函数的操作都将引发错误。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b2501ed2e012808d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>回避虚函数机制</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-76ee4010b07b89d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-565010f5675e5fdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.4抽象基类</strong></p>
-<p><strong>纯虚函数</strong></p>
-<p>在函数体的位置（声明语句；之前）书写=0，说明此函数没有实际意义，无序定义。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8dd74815b8f5ba80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-63779eeaa4933dd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-281027d42a508630.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-94cbce60bbc06a16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>其派生类可以创建对象。</p>
-<p><strong>派生类构造函数只初始化它的直接基类。</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-feceb03f2d48af54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>disc_quot是抽象基类。</p>
-<p><strong>15.5访问控制与继承</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b04cee8b5dcb1d79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-55a9e567bba98f01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e5247d6edcfdf3d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-29286b87cf121f1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1237a47e599372b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a31f3ad05216d4fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-96f0d3054e69a084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>友元与继承</strong></p>
-<p>友元关系不能传递也不能继承，派生类的友元也不能随意访问基类的成员；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c811cbadb712a5a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>改变个别成员的可访问行</strong></p>
-<p>采用using声明。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8a2338dc53832cf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.6继承中的类作用域</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4bbb97e1d10d9b2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>在编译时进行名字查找</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8a5e989fbbe5ffe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>通过作用域运算符来使用隐藏的成员</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f76798b547eac8d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>一如往常，名字查找优先于类型检查</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-adff436731c8d972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>隐藏了就不能用了</p>
-<p><strong>覆盖重载的函数</strong></p>
-<p>如果派生类希望所有重载版本对他来说都是可见的，那么它就需要覆盖所有的版本，或者一个也不覆盖。</p>
-<p><strong>15.7构造函数与拷贝控制</strong></p>
-<p><strong>15.7.1虚析构函数</strong></p>
-<p>我们通过在基类中将析构函数定义成虚函数以确保执行正确的析构函数版本。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f8a0507bb3be1adc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e307503a4ee49146.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.7.2合成拷贝控制与继承</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-43888994c5fd50c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b1d941465dd22a83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>15.7.4继承的构造函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-da281b65429db9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>继承的构造函数的特点</strong></p>
-<p>一个using声明不会改变该构造函数的访问级别</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cf18e5201e74fc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e1eb2e97332826e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>大多数派生类会继承所有基类的构造函数，两个例外情况，（1）派生类可以继承一部分构造函数，而为其他构造函数定义自己的版本。（2）是默认、拷贝和移动构造函数不会被继承。这些构造函数按照正常规则被合成。</p>
-<p><strong>15.8容器与继承</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9ac36d8caf440b26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0aefecfe37d636a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-577046a62f78cb24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          15面向对象程序设计15面向对象程序设计
+三个基本概念：数据抽象、继承和动态绑定。
+  
+15.1oop：概述
+  
+  
+虚函数virtual：不继承基类，基类有，希望派生类定义自身的版本。为了显示表明派生类改写了基类的虚函数在该函数的形参之后增加一个override。
+派生列表：
+  
+动态绑定
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/15面向对象程序设计/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -796,67 +591,21 @@
       
         
           
-            <h1 id="14重载运算与类型转换"><a href="#14重载运算与类型转换" class="headerlink" title="14重载运算与类型转换"></a>14重载运算与类型转换</h1><p><strong>14重载运算与类型转换</strong></p>
-<p><strong>14.1基本概念</strong></p>
-<p>Operator重载的运算符包含返回类型、参数列表以及函数体。</p>
-<p>左侧运算对象传递给第一个参数，而右侧运算对象传递给第二个参数。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c248c85cb2f8b823.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-884193a9bf71d988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>不应该被重载：逻辑与、或运算符，逗号运算符；&amp;&amp;和||；不重载逗号运算符和取地址运算符。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c4c33f0322328477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-07bf05f13eb9be3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>重载的赋值运算应该继承而非违背其内置版本的含义。</p>
-<p><strong>选择作为成员或者非成员</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-680ddb27bec9c57b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>如果我们想提供含有类对象的混合类型表达式，则运算符必须定义成非成员函数。它的左侧运算对象必须是运算符所属类的一个对象。</p>
-<p><strong>14.2输入和输出运算符</strong></p>
-<p>输入输出运算符是非成员函数</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d8edf1521834a41f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-297c4ca573082412.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.3算术和关系运算符</strong></p>
-<p><strong>14.3.1相等运算符设计准则</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-84b83790e433707b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.3.2关系运算符设计准则</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-53ab0bedf5330bf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.5下标运算符</strong></p>
-<p>必须是成员函数</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-836b75ece8498410.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.6递增和递减运算符</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7f65931bf8e43a1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>前置++i</strong>；</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-947ba5a54cbf3408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>后置**</strong>i++**</p>
-<p>接受一个额外的（不被使用）int类型的形参，编译器会提供0</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-fd798382377834bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.7成员访问运算符</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-35c669beb2361ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.8函数调用运算符</strong></p>
-<p>定义了调用运算符，则该类的对象称作函数对象。可以调用这种对象，“行为像函数一样”。</p>
-<p><strong>14.8.1lambda是函数对象</strong></p>
-<p>….</p>
-<p><strong>14.8.2标准库定义的函数对象</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4556e96d6cfaaef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.8.3可调用对象与function</strong></p>
-<p>标准库function类型</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-83b52ee0eb2ce7b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-78d394c1e9161e7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d862ecba8f5c531b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>重载的函数与**</strong>function**</p>
-<p>不能（直接）将重载的函数名字存入function类型的对象中，以免二义性，解决途径是存储函数指针。</p>
-<p><strong>14.9重载、类型转换和运算符（还未get到点）</strong></p>
-<p><strong>14.9.1类型转换运算符</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1ed9a61e4452178f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>可以面向任意类型（void除外）进行定义，不允许转换成数组或者函数类型，但允许转换成指针（包括数组指针及函数指针）或者引用类型。必须定义成类的成员函数，通常不应该改变转换对象的内容，一般定义成const成员。</p>
-<p>显示的类型转换运算符（explicit），一般要通过显示的强制类型转换。但存在一个例外，就是表达式被用作条件，以下表达式出现下列位置时，会隐式的执行转换。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1319b7f1bf011ffb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.9.2避免有二义性的类型转换</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-939d59553ab27497.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1551250573ae0e30.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>14.9.3函数匹配与重载运算符</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-92e4d7575612575d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a168454852b1fd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          14重载运算与类型转换14重载运算与类型转换
+14.1基本概念
+Operator重载的运算符包含返回类型、参数列表以及函数体。
+左侧运算对象传递给第一个参数，而右侧运算对象传递给第二个参数。
+  
+  
+不应该被重载：逻辑与、或运算符，逗号运算符；&amp;&amp;和||；不重载逗号运算符和取地址
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/14重载运算与类型转换/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -974,90 +723,22 @@
       
         
           
-            <h1 id="13拷贝控制"><a href="#13拷贝控制" class="headerlink" title="13拷贝控制"></a>13拷贝控制</h1><p><strong>13拷贝控制</strong></p>
-<p><strong>13.1拷贝、赋值与销毁</strong></p>
-<p><strong>13.1.1拷贝构造函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-33f0abd8922ab3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>拷贝构造函数的第一个参数必须是引用类型。</p>
-<p>使用拷贝初始化时，我们要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的画还要进行类型转换。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7110505e76359fa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>在函数调用过程中，具有非引用类型的参数要进行拷贝初始化。拷贝构造函数被用来初始化非引用类型参数。</p>
-<p>我们使用explicit就不要考虑是拷贝初始化还是直接初始化了。</p>
-<p><strong>13.1.2拷贝赋值运算符</strong></p>
-<p>如果运算符是一个成员函数，其左侧运算对象就绑定到隐式的this参数。右侧运算对象作为显示参数传递。赋值运算符应该返回一个指向左侧运算对象的引用。</p>
-<p><strong>13.1.3析构函数</strong></p>
-<p>构造函数初始化对象的非static数据成员；析构函数释放对象使用的资源，并销毁对象的非static数据成员。对一个给定类只会有唯一一个析构函数。</p>
-<p>在一个析构函数中，首先执行函数体，然后销毁成员。成员按初始化顺序的<strong>逆序</strong>销毁。析构函数释放对象在生存期分配的所有资源。</p>
-<p>隐式销毁一个内置指针类型成员不会delete它所指向的对象。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-26d35b46a57a618b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.1.4三五法则</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-60691b4be4d34dfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-667f230a09f8af42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>需要拷贝操作的类也需要赋值操作，反之亦然</strong>。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-828c3b9bdd1e5f24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.1.5使用=default</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1586e3d9cb41c9d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7008889c2994540d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.1.6阻止拷贝</strong></p>
-<p>为什么拷贝、赋值、销毁的合成版本会阻止其操作？</p>
-<p>对某些类来说，这些操作没有合理的意义，所以得采用某种机制阻止拷贝或赋值。例如iostream类阻止了拷贝。</p>
-<p><strong>定义删除的函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-53864437d1cb0c6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-57d5b4c401a65cfa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>析构函数不能是删除的成员，可定义，但带来的后果是灾难性的。</p>
-<p><strong>合成的拷贝控制成员可能是删除的。</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-37c70a153fd088da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-15554a5087fdbdb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-039df0e36828c8ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ea81ce512bf24b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.2拷贝控制和资源管理</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3c207f3029483a6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.2.1行为像值的类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9d1f6e2be3e921c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9b74324964eb0839.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.2.2行为像指针的类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cf2b1d40fcd56959.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>定义引用计数来决定什么时候delete。将计算器保存在动态内存中。</p>
-<p><strong>13.3交换操作</strong></p>
-<p>底层利用std：：swap交换</p>
-<p><strong>在赋值运算符中使用swap</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-043e22193fbfd9b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8f8b243adb018f92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.6对象移动</strong></p>
-<p>某些情况下通过对象移动能够“拷贝、赋值”能够节省很多资源。</p>
-<p><strong>13.6.1右值引用&amp;&amp;</strong></p>
-<p>右值引用必须绑定到右值的引用，利用&amp;&amp;来获得右值引用。</p>
-<p>左值=右值；一个左值表达式表示的是一个对象的身份（地址），而右值表达式表示的是对象的值。</p>
-<p>常规引用为<strong>左值引用。</strong>不能将其绑定到要求转换的表达式、字面常量或是返回右值的表达式。</p>
-<p>右值引用也不过是对象的另一个名字而已，可以绑定到左值引用不能绑定的对象上，但是不能将一个右值引用直接绑定到一个左值上。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ca995cdfc0c009ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>左值持久；右值短暂</strong></p>
-<p>左值具有持久的状态，而右值要么是字面常量，要么是在表达式求值过程中创建的临时对象。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e40ea208d82e65fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.6.2移动构造函数和移动赋值运算符</strong></p>
-<p>移动构造函数第一个参数是该类的一个右值引用。直接移动，然后在析构实参。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-dad351d9fdba154f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>noexcept（通知标准库不抛出任何异常），必须在头文件的声明中和定义中（如果定义在类外）都指定noexcept。</p>
-<p>移动构造函数不分配任何新内存。</p>
-<p>移动赋值运算符是先清空本身，在移动，在析构实参。</p>
-<p>与拷贝操作不同，移动操作用于不会隐式定义为删除的函数。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-58c631848f77b147.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-76e43745361b789e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>用拷贝构造函数代替移动构造函数几乎肯定是安全的（赋值也是如此）。</p>
-<p><strong>移动右值拷贝左值，但如果没有移动构造函数，右值也被拷贝。</strong></p>
-<p><strong>移动迭代器</strong></p>
-<p>一个迭代器一般解引用运算符返回一个指向元素的左值。而移动迭代器的解引用运算符生成有个<strong>右值引用。</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-bbc465e0a9e9d49c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cc4e41cbd453aa80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-644e2e29c92b6073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-931d86d66eacb98b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>13.6.3右值引用和成员函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2bc88bed303a217f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>实参类型决定了新元素是拷贝还是移动到容器中。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2d459dbd139f1020.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-eb2ca30a919372d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          13拷贝控制13拷贝控制
+13.1拷贝、赋值与销毁
+13.1.1拷贝构造函数
+  
+拷贝构造函数的第一个参数必须是引用类型。
+使用拷贝初始化时，我们要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的画还要进行类型转换。
+  
+在函数调用过程中，具有非引用类型的参数要进行拷贝初始化。拷贝构造函
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/13拷贝控制/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1175,69 +856,20 @@
       
         
           
-            <h1 id="12动态内存"><a href="#12动态内存" class="headerlink" title="12动态内存"></a>12动态内存</h1><p><strong>12动态内存</strong></p>
-<p>每个程序分配有静态内存和栈内存，还有一个内存池称为自由空间或堆。用来存储动态分配。</p>
-<p><strong>12.1动态内存与只能指针</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-281c5db0b58d885c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>内存泄露：旺角是否内存；引用非法内存的指针：尚有指针引用内存却释放了。</p>
-<p>智能指针：shared_ptr允许多个指针指向同一个对象，unique_ptr独占所指对象，weak_ptr弱引用指向shared_ptr。头文件memory。</p>
-<p><strong>12.1.1shard_ptr类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a4298a976414499e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-790520df2214a3e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>Make_shared函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-769ec0d64f697e79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>Shared_ptr有引用计数，拷贝或者利用其初始化或者传递给另一个函数或者作为函数返回值引用计数都会加1。给其赋新值，或是被销毁，或离开其作用域，计数器都会递减。计数器为0时，就会释放。还会释放相关联的内存。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5fdf8ca9165a1c39.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7e69521229b1a6e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-71eecabe3ddd8705.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>12.1.2直接管理内存</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c2f1c04121304912.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-09961ce3502b298c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6b3f3d659cbfdd6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-00d7d471a9203183.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ce65272670b54723.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6eb03cd6b665b5ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3c786f0fa13a665e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>Delete之后重置指针值</strong></p>
-<p>空悬指针，指针仍有但内存已经释放。</p>
-<p><strong>12.1.3shared_ptr和new结合使用</strong></p>
-<p>不能进行内置指针到智能指针间的隐式转换，必须使用直接初始化形式。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-268d24df9b17812b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-823dabf3a890194c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ca19ad2fc0333947.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>不要混合使用普通指针和智能指针，也不要使用**</strong>get初始化另一个智能指针或为智能指针赋值。**</p>
-<p><strong>14.1.4智能指针和异常</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f8fc86d9db4835f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>12.1.5unique_ptr</strong></p>
-<p>某个时刻智能有一个unique_ptr指向一个给定的对象（独占）。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0fc8c8f3b511f9d6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d1371b6478864387.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ad0806194f0d2f3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>12.1.6weak_ptr</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-385772c74aaf4c7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-24aa5302e3d74482.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>核查指针类</strong></p>
-<p>是用weak_ptr去初始化类成员，不会影响weak_ptr指向对象的生成期。</p>
-<p><strong>12.2动态数组</strong></p>
-<p><strong>12.2.1new和数组</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d968a888e8d9f17a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>分配一个数组会得到一个元素类型的指针</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a587737d64cc8840.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>如果初始化器数目小于元素数目，剩余元素将进行值初始化。如果初始化器数目大于元素数目，则new表达式失败，不会分配内存。</p>
-<p><strong>动态分配一个空数组是合法的</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ef28c17fc3831742.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>按逆序销毁，从后向前</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-27b8c67f248c0001.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-432176b8f72f2d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>可以用下标访问。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7c78a851dff5d74f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-428bf99cceb04eff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>12.2.2allocator类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-efeea51cbef7282e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ed74c5ff5a925939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>allocator分配为构造的内存，要使用其返回的内存，必须用construct构造对象。使用未构造的内存，其行为是未定义的。</p>
-
-          
+          12动态内存12动态内存
+每个程序分配有静态内存和栈内存，还有一个内存池称为自由空间或堆。用来存储动态分配。
+12.1动态内存与只能指针
+  
+内存泄露：旺角是否内存；引用非法内存的指针：尚有指针引用内存却释放了。
+智能指针：shared_ptr允许多个指针指向同一个对象，unique_ptr独占所
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/12动态内存/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1355,60 +987,26 @@
       
         
           
-            <h1 id="11关联容器"><a href="#11关联容器" class="headerlink" title="11关联容器"></a>11关联容器</h1><p><strong>11关联容器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b2bd38b987a71b38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.1使用关联容器</strong></p>
-<p>Map，关键字-值对的集合。例如，可以将一个人的名字做关键字，其电话号码作为值。</p>
-<p>Set关键字的简单集合。</p>
-<p>使用map，set。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d5e6dd31929f062e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8ec33b9df4d5b4ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.2关联容器概述</strong></p>
-<p>如上，map既要指明关键字类型又指明值类型。Set只需指明关键字类型。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-60fc15cd16abe783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.2.2关键字类型的要求</strong></p>
-<p>在集合类型中（set），关键字类型就是元素类型。在映射类型中（map，hash），关键字类型是元素的第一部分的类型。</p>
-<p><strong>有序容器的关键字类型</strong></p>
-<p>严格弱序，小于等于</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b397ec6decd161c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.2.3pair类型</strong></p>
-<p>定义在头文件utility中，</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c1be4dbccb4e29d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>成员是public的，两个成员分别命名为first和second。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-576d3c96f70ab357.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>创建**</strong>pair对象的函数**</p>
-<p>函数返回一个pair</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d6e5e7910183d23b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7f57ed40e766f1fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.3关联容器的操作</strong></p>
-<p>不能改变一个元素的关键字，是const的。Pair的第一个元素是关键字so</p>
-<p><strong>11.3.1关联容器迭代器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e873b3d864f67ae6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>当解引用一个关联容器迭代器时，得到一个类型为容器的value_type，</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a0dbb25cbb02974b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>set的迭代器是const的</p>
-<p><strong>11.3.2添加元素</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1fb844cf4cde0f54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-68df4970351650b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5edb0066de5ce172.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.3.3删除元素</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-203c68760e8cd22b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.3.4map的下标操作</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a2f7b8ffa45951fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>使用下标操作的返回值</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-10441b755697bcd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>11.3.5访问元素</strong></p>
-<p>find，和count。Count会统计有多少个元素有相同的关键字</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e762b3b39722d266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3adb94b8a7afa035.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>对map使用find代替下标操作</strong></p>
-<p>下标访问若不存在会新建</p>
-<p><strong>11.4无序容器</strong></p>
-<p>利用hash函数和关键字类型的==运算符来组织元素。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f0141a3cac03f6ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-84dccb1c955f298a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          11关联容器11关联容器
+  
+11.1使用关联容器
+Map，关键字-值对的集合。例如，可以将一个人的名字做关键字，其电话号码作为值。
+Set关键字的简单集合。
+使用map，set。
+  
+  
+11.2关联容器概述
+如上，map既要指明关键字类型又指明值类型。Set只需指明关键字类型。
+  
+11
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/11关联容器-1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1526,101 +1124,32 @@
       
         
           
-            <h1 id="10泛型算法"><a href="#10泛型算法" class="headerlink" title="10泛型算法"></a>10泛型算法</h1><p><strong>10泛型算法</strong></p>
-<p><strong>10.1概述</strong></p>
-<p>泛型算法不能改变容器的大小，依赖于元素类型的操作。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3d46df1e425af465.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-216d8be586b434e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.2初识泛型算法</strong></p>
-<p><strong>10.2.1只读算法</strong></p>
-<p>find</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-667b28201648d3cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-33c08e185d37015a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.2.2写容器元素的算法</strong></p>
-<p>fill</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c61678aa3532cbe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>back_inserter</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-feecca367861bc22.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-92e48b3aaaba40e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.2.3重排容器元素的算法</strong></p>
-<p>sort, unique</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ffef062637c3e23b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.3定制操作</strong></p>
-<p><strong>10.3.1想算法传递函数</strong></p>
-<p>谓词：是一个可调用的表达式，其返回结果是一个能用作条件的值（即返回作为条件去判断）。</p>
-<p>一元谓词接受单一参数，二元谓词两个。接受谓词参数的算法元素类型必须能转换成谓词的参数类型。</p>
-<p><strong>10.3.2lambda</strong></p>
-<p>可调用类型有：函数，函数指针，lambda表达式，重载了函数调用运算符的类。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c454c5a231b8b39c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3fd9669df3e05694.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9b66ee9049335494.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>向**</strong>lambda传递参数**</p>
-<p>Lambda不能有默认参数，调用的实参数目永远与形参数目相等。</p>
-<p><strong>使用捕获列表</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a6b278ccfa5fff96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.3.3lambda捕获和返回</strong></p>
-<p><strong>值捕获</strong></p>
-<p>值捕获的前提是变量可以拷贝，与参数不同，被捕获的变量的值是在lambda创建时拷贝，而不是调用时拷贝。</p>
-<p><strong>引用捕获</strong></p>
-<p>必须保证被引用的对象在lambda执行的时候是存在的。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7cee439978dcdba7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>隐式捕获</strong></p>
-<p>编译器可以推断捕获列表，但要在列表中加&amp;或=，&amp;表引用，=表值。</p>
-<p>可以混合使用隐式捕获和显式捕获。但第一个元素必须是隐式的。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1e585dce7ffd7c64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>可变**</strong>lambda**</p>
-<p>希望改变一个捕获的值，加关键字mutable</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-94a02b1b406b4177.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>指定**</strong>lambda的返回类型**</p>
-<p>必须尾置返回类型</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b78f367408528ff4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.3.4参数绑定bind</strong></p>
-<p>头文件functional， 命名空间在std：：placeholders</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-15230e32c64ba72f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-de5b7975b9a71af5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8300ab511c99a84f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>例：f(a, b, c, d, e);</p>
-<p>Auto g=bind(f, a, b, _2, d, _1);</p>
-<p>g(X, Y);等价于f(a, b, Y, d, X);</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c7e44e2d6eb77431.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.4再探迭代器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e8ed62dd0ed609a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5b29f760b1813d10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.4.1插入迭代器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b74019fc3a894430.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.4.2iostream迭代器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7e529fcd9d9ff6e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>Iostream_iterator操作</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8fc3010cae38428e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>Ostream_iterator操作</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b6d442f53f1b9230.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.4.3反向迭代器</strong></p>
-<p>rbegin，rend, crbegin, crend</p>
-<p>除了forward_list外其他容器都支持。</p>
-<p>反向迭代器与正常的顺序是相反的，也有++，–但与正常相反</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7912bbaf3e15c2fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9f2dbc8ec52efa1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>用base（）获得正常的迭代器。</p>
-<p><strong>10.5泛型算法结构</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c1a5e31fe0fa4b4a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.5.1  5类迭代器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2c8a1abd057442c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3232c6bf056f9e33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-947cfb6b00f0d9d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-714d186e22ba05c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.5.2算法形参模式</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b072efb209c895fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>Dest表示算法可以写入目的位置的迭代器</p>
-<p><strong>10.5.3算法命名规范</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-74df40a022643b27.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f71dd1bca6cfd4f1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3193fa0860456f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>10.6特定容器算法</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8d3eb715196edd94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1524186ca944c11f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-19ecd8318089afff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          10泛型算法10泛型算法
+10.1概述
+泛型算法不能改变容器的大小，依赖于元素类型的操作。
+  
+  
+10.2初识泛型算法
+10.2.1只读算法
+find
+  
+  
+10.2.2写容器元素的算法
+fill
+  
+back_inserter
+  
+  
+10.2.3重排容器元素的算法
+sort, 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/10泛型算法/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1738,88 +1267,31 @@
       
         
           
-            <h1 id="9顺序容器"><a href="#9顺序容器" class="headerlink" title="9顺序容器"></a>9顺序容器</h1><p><strong>9顺序容器</strong></p>
-<p>为程序员提供控制元素存储和访问顺序的能力。</p>
-<p><strong>9.1顺序容器概述</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-26d9f87ebed3650d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c4c26dc714cad8eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a6babe604bf35549.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.2容器库概览</strong></p>
-<p>头文件和名字一样，模板类，要提供元素类型信息。可以保存另外一种容器。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1fc275774e38aeff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-67bd394bdcd27f23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6e2f05a41b53c704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.2.1迭代器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-fba9fc17a9a20143.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.2.4容器定义和初始化</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3f93420f2da5c4de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>标准库**</strong>array**</p>
-<p>初始化要给类型和大小</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a54b4da45c30b50b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>列表初始化，初始值的数目必须小于或等于array的大小。</p>
-<p>Array弥补了数组不能拷贝或赋值操作，它可以赋值和拷贝。</p>
-<p><strong>9.2.5赋值和swap</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a73ca82929893bab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-992dd775426bceb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>也可以认为只是交换了名字，看源码去验证。  </p>
-<p><strong>9.2.7关系运算符</strong></p>
-<p>两个运算对象必须是相同类型的容器</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1e30e46926ad6580.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>最后一条解释：两个不等长的容器，比较第一个不等的元素的大小来确定大小</p>
-<p><strong>9.3顺序容器操作</strong></p>
-<p><strong>9.3.1添加元素</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d3e130aded8c527e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4478a481c245be47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>使用**</strong>emplace操作**</p>
-<p>Insert和push实际拷贝传参，而emplace的是将传参传递给构造函数，在容器管理的内存空间中直接构造元素。</p>
-<p><strong>9.3.2访问元素</strong></p>
-<p><strong>访问成员函数返回的是引用</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ef0732b10a97ddcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.3.3删除元素</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-21aeb5cca4238862.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.3.4特殊的forward_list操作</strong></p>
-<p>Forward_list是一个单向列表so</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4cf4effedbefbe07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.3.5改变容器的大小</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-33070cd379a58705.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.3.6容器操作可能是迭代器失效</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-5b978fae3b143d6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>不要保存**</strong>end返回的迭代器，**而是不断更新end迭代器</p>
-<p><strong>9.4vector对象是如何增长的</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ce44ad5380e78237.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>Capacity和size</strong></p>
-<p>Size是容器中元素的数量</p>
-<p>Capacity是容器的大小</p>
-<p><strong>9.5额外的string操作</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-20736c7e1af6b4af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.5.1构造string的其他方法</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-97fa915a69b74078.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.5.2改变string的其他方法</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-85d54ac1d76e3dc8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-104a9b09a7c51704.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>改变**</strong>string的多种重载函数**</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-359bba7896cef5ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.5.3string搜索操作</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c1450e1b9a544372.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3e0cb321c98d7aa4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.5.4compare函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-64ee23c98685d854.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.5.5数值转换</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7cb4947a2eabf74f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>9.6容器适配器（就是换成相应的栈、队列、优先队列）</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-326aea5b001722b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>定义一个适配器</strong></p>
-<p>Deque<int>  deq;</int></p>
-<p>Stack<int>  std(deq);</int></p>
-<p><strong>可在某种容器上实现适配器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a65853c02e6f8290.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>栈适配器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-76ab5acef96c033b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>队列适配器</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6394c422c1895aab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-afe2c9095cce1154.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          9顺序容器9顺序容器
+为程序员提供控制元素存储和访问顺序的能力。
+9.1顺序容器概述
+  
+  
+  
+9.2容器库概览
+头文件和名字一样，模板类，要提供元素类型信息。可以保存另外一种容器。
+  
+  
+  
+9.2.1迭代器
+  
+9.2.4容器定义和初始化
+  
+标准库**array**
+初始化
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/9顺序容器/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1937,50 +1409,18 @@
       
         
           
-            <h1 id="7类"><a href="#7类" class="headerlink" title="7类"></a>7类</h1><p><strong>7类</strong></p>
-<p>This是一个常量的指针，把const关键字放在成员函数的参数列表之后，此时，紧跟在参数列表之后const表示this是一个指向常量的指针。</p>
-<p>如果非成员函数是类接口的组成部分，则这些函数的声明应该与类在同一个文件夹内。</p>
-<p>构造函数的名字与类名相同，和其他函数不一样的是，构造函数没有返回类型，除此之外类似于其他的函数，构造函数也有一个（可能为空的）参数列表和一个（可能为空的）函数体。</p>
-<p>编译器会合成默认的拷贝、赋值和析构函数。</p>
-<p>访问说明符：public private</p>
-<p>Class在访问说明符定义之前的成员为private的，struct则是public。</p>
-<p>友元：其他类或者函数访问它的非公有成员。前加friend。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6ce504b916315699.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>友元的声明仅仅指定了访问的权限，不是一个通常意义上的函数声明。类的用户还要在友元声明之外在对函数进行声明。</p>
-<p><strong>7.3类的其他特性</strong></p>
-<p>可变数据成员，通过mutable关键字，可以修改类的某个数据成员，甚至是const成员函数。</p>
-<p>友元函数能定义在类的内部，这样的函数是隐式内联的。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d6b4034af5a7f019.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3520ba880e2a6db4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>不完全类型，只声明无定义的类。</p>
-<p>友元在类内部定义，外部也必须进行声明，类的用户才能使用。</p>
-<p>编译器处理完类中的全部声明后才会处理成员函数的定义。</p>
-<p>类型名要特殊处理，类外面用typedef定义一种数据类型，类的内部不能在定义这个名字了。</p>
-<p><strong>函数名字查找</strong></p>
-<p>先在成员函数内-&gt;类-&gt;类外面</p>
-<p>构造函数初始值列表</p>
-<p>类内成员是const或者是引用的话，必须将其初始化，类似的，当成员属于某种类类型且该类没有定义默认构造函数时，也必须将这个成员初始化。</p>
-<p>如果类内一个成员是用另一个成员初始化的，这个两个成员的初始化顺序很关键。</p>
-<p><strong>委托构造函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4b947bd848132ce0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a9eb6fa89b16b774.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>默认构造函数的作用</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-51c25f128d1f3dce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>警惕这种错误</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c60887280607f473.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>隐式的类类型转换</strong></p>
-<p>Explicit抑制隐式转换，只能显示调用。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-231ff17e03aa7d52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>7.5.5聚合类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-251f4f38477572d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>7.5.6字面值常量类</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-de6d9c0f134d9132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>7.6类的静态成员</strong></p>
-<p>静态数据成员的类型可以是常量、引用、指针、类类型。</p>
-<p>静态成员函数也不与任何对象绑定在一起，它们不包含this指针。静态成员函数不能声明成const的，也不能在static函数体内用this指针。</p>
-<p>成员函数不用通过作用域运算符就能直接使用静态成员；</p>
-
-          
+          7类7类
+This是一个常量的指针，把const关键字放在成员函数的参数列表之后，此时，紧跟在参数列表之后const表示this是一个指向常量的指针。
+如果非成员函数是类接口的组成部分，则这些函数的声明应该与类在同一个文件夹内。
+构造函数的名字与类名相同，和其他函数不一样的是，构造函数没有返回类型，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/7类/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2098,87 +1538,22 @@
       
         
           
-            <h1 id="6-函数"><a href="#6-函数" class="headerlink" title="6.函数"></a>6.函数</h1><p><strong>6.1基础</strong>  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-973e672ed200d8b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>实参是形参的初始值。</p>
-<p><strong>局部对象</strong></p>
-<p>名字有作用域，对象有生命周期。</p>
-<p>名字的作用域是程序文本的部分，名字在其中可见。</p>
-<p>对象的生命周期是程序执行过程中该对象存在的一段时间。</p>
-<p>形参和函数体内部定义的变量统称为局部变量。它们对函数而言是“局部”的，仅在函数的作用域内课件，同时局部变量还会隐藏在外层作用域中同名的其他所有声明中。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0940a4c0ff55753f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>函数声明</strong></p>
-<p>函数只能定义依次，但可以声明多次。函数声明无须函数体，用一个分好替代即可。因为函数的声明不包含函数体，所以也就不需要形参的名字。</p>
-<p>函数的三要素（返回类型、函数名、形参类型）描述了函数的接口，函数声明也称为<strong>函数原型。</strong></p>
-<p><strong>分离式编译</strong></p>
-<p>分离式编译允许我们把程序分割到几个文件中去，每个文件独立编译。</p>
-<p><strong>6.2参数传递</strong></p>
-<p>如果形参是引用类型，它将绑定到对应的实参中；否则将实参的值拷贝后赋给形参。（形参用&amp;，即引用，函数使用的其实是实参，如有更改，实参更改）。形参是引用类型，称它对应的实参为<strong>引用传递</strong>，函数被<strong>传引用调用。</strong>引用形参是它对应的实参的别名。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-321db42d39cf320b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>指针形参</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-904630bbd493a3d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>只是实参的指针指向的位置拷贝给形参，所以两者指向都是同一个对象。</p>
-<p>建议使用引用类型的形参替代指针。</p>
-<p><strong>使用引用避免拷贝</strong></p>
-<p>当某种类型不支持拷贝操作时，就只能用引用形参访问对象。</p>
-<p><strong>使用引用形参还能返回额外的信息</strong></p>
-<p>Return只能返回一个值，引用形参更改了实参的值，其实是返回多个结果。</p>
-<p><strong>Const形参和实参</strong></p>
-<p>当形参有顶层const是，传给它的对象常量或者非常量对象都是可以的。</p>
-<p>尽量使用常量引用，不能把const对象、字面值或者需要类型转换的对象传递给普通的引用形参。</p>
-<p>数组形参</p>
-<p>数组的特殊性质：</p>
-<p>（1）不允许拷贝数组以及使用数组时（通常）会将其转换成指针，所以不能值传递。</p>
-<p>（2）因为数组会转换成指针，所以当我们为函数传递一个数组时，实际上传递的是指向数组首元素的指针。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-11cd7943681c6988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-82d62b1d6bc1db6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>管理数组长度的三种技术</strong></p>
-<p>（1）使用标记指定数组长度，要求数组本身包含一个结束标记，如字符串的空字符。</p>
-<p>（2）使用标准库规范，传递数组首元素和尾后元素的指针。（begin，end函数）</p>
-<p>（3）显示传递一个数组的大小</p>
-<p>只有当函数确实要改变元素值的时候才把形参定义成指向非常量的指针。</p>
-<p>实参要与形参定义的数组维度一致。</p>
-<p><strong>含有可变形参的函数</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d8f76d8380f90c64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>使用initializer_list的条件是函数的实参数量未知但是全部实参类型相同。其内部元素<strong>永远是常量</strong>。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c50720d384fd27d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>6.3返回类型和return语句</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a5e45967098752fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>不要返回局部对象的引用和指针。</p>
-<p>可以返回花括号包围值的列表。</p>
-<p><strong>返回数组指针</strong></p>
-<p>返回数组和指针比较麻烦，可以使用类型别名。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1c148fa4d92d8521.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>返回数组，要牢记被定义名字后面数组的维度。</p>
-<p>使用尾置返回类型，</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d9307bff1327b620.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>使用decltype</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6bca76ed9963b8f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>6.4函数重载</strong></p>
-<p>一个拥有顶层const的形参无法和另一个没有顶层const的形参区分开来；</p>
-<p>函数匹配是指一个过程，在这个过程中我们把函数调用与一组重载函数中的某一个关联起来，函数匹配也叫做重载确定。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-47cb3368cf1718d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9d1a01e9cd84a6a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>6.5特色用途语言特性</strong></p>
-<p><strong>6.5.1默认实参</strong></p>
-<p>这样一种形参，在函数的很多次调用中他们都被赋予一个相同的值，此时，称这个反复出现的值为默认实参。</p>
-<p>给定的作用域中的一个形参只能赋予一次默认实参。函数的后续声明只能为之前那些没有默认值的形参添加默认实参，而且该形参右侧的所以形参必须都有默认值。</p>
-<p><strong>6.5.2内联函数和constexpr</strong></p>
-<p>内联函数加上inline可以避免额外花销。</p>
-<p>Constexpr函数能用于常量表达式，函数的返回类型及所有形参的类型都得是字面值类型，而且函数体中必须有且只有一条return语句：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9a4cc49888d66cf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>6.6函数匹配</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f72889579a40702d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>最佳匹配：实参类型与形参类型越来越近，它们匹配的越好。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d6c4d83799db166f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>所有的算术类型转换的级别都一样。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cdbf33620b04f5fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p><strong>6.7函数指针</strong></p>
-<p>不能定义函数类型的形参，但是形参可以是指向函数的指针。也可以返回指向函数类型的指针。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/8542527-89c410253e026bff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
-<p>��C0��</p>
-
-          
+          6.函数6.1基础  
+  
+实参是形参的初始值。
+局部对象
+名字有作用域，对象有生命周期。
+名字的作用域是程序文本的部分，名字在其中可见。
+对象的生命周期是程序执行过程中该对象存在的一段时间。
+形参和函数体内部定义的变量统称为局部变量。它们对函数而言是“局部”的，仅在函数的作用域内课件，同时局部变
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/guigui51.github.io/2018/09/01/6-函数-html/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2262,7 +1637,7 @@
               
                 <a href="/guigui51.github.io/archives">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
