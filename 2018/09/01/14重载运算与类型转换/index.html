@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/guigui51.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/guigui51.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/guigui51.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/guigui51.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/guigui51.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/guigui51.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/guigui51.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="14重载运算与类型转换14重载运算与类型转换 14.1基本概念 Operator重载的运算符包含返回类型、参数列表以及函数体。 左侧运算对象传递给第一个参数，而右侧运算对象传递给第二个参数。       不应该被重载：逻辑与、或运算符，逗号运算符；&amp;amp;&amp;amp;和||；不重载逗号运算符和取地址运算符。       重载的赋值运算应该继承而非违背其内置版本的含义。 选择作为成员或者非成员">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14重载运算与类型转换">
+<meta property="og:url" content="http://wuyang51.space/2018/09/01/14重载运算与类型转换/index.html">
+<meta property="og:site_name" content="龟龟的搬砖之路">
+<meta property="og:description" content="14重载运算与类型转换14重载运算与类型转换 14.1基本概念 Operator重载的运算符包含返回类型、参数列表以及函数体。 左侧运算对象传递给第一个参数，而右侧运算对象传递给第二个参数。       不应该被重载：逻辑与、或运算符，逗号运算符；&amp;amp;&amp;amp;和||；不重载逗号运算符和取地址运算符。       重载的赋值运算应该继承而非违背其内置版本的含义。 选择作为成员或者非成员">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-c248c85cb2f8b823.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-884193a9bf71d988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-c4c33f0322328477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-07bf05f13eb9be3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-680ddb27bec9c57b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-d8edf1521834a41f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-297c4ca573082412.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-84b83790e433707b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-53ab0bedf5330bf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-836b75ece8498410.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-7f65931bf8e43a1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-947ba5a54cbf3408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-fd798382377834bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-35c669beb2361ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-4556e96d6cfaaef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-83b52ee0eb2ce7b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-78d394c1e9161e7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-d862ecba8f5c531b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-1ed9a61e4452178f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-1319b7f1bf011ffb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-939d59553ab27497.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-1551250573ae0e30.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-92e4d7575612575d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-a168454852b1fd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-01T14:20:21.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14重载运算与类型转换">
+<meta name="twitter:description" content="14重载运算与类型转换14重载运算与类型转换 14.1基本概念 Operator重载的运算符包含返回类型、参数列表以及函数体。 左侧运算对象传递给第一个参数，而右侧运算对象传递给第二个参数。       不应该被重载：逻辑与、或运算符，逗号运算符；&amp;amp;&amp;amp;和||；不重载逗号运算符和取地址运算符。       重载的赋值运算应该继承而非违背其内置版本的含义。 选择作为成员或者非成员">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8542527-c248c85cb2f8b823.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/guigui51.github.io/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wuyang51.space/2018/09/01/14重载运算与类型转换/"/>
+
+
+
+
+
+  <title>14重载运算与类型转换 | 龟龟的搬砖之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/guigui51.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">龟龟的搬砖之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">fighting</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/guigui51.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/guigui51.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/guigui51.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-文章分类">
+          <a href="/guigui51.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文章分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-文章列表">
+          <a href="/guigui51.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wuyang51.space/guigui51.github.io/2018/09/01/14重载运算与类型转换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="龟龟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/guigui51.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="龟龟的搬砖之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">14重载运算与类型转换</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-01T22:20:13+08:00">
+                2018-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="14重载运算与类型转换"><a href="#14重载运算与类型转换" class="headerlink" title="14重载运算与类型转换"></a>14重载运算与类型转换</h1><p><strong>14重载运算与类型转换</strong></p>
+<p><strong>14.1基本概念</strong></p>
+<p>Operator重载的运算符包含返回类型、参数列表以及函数体。</p>
+<p>左侧运算对象传递给第一个参数，而右侧运算对象传递给第二个参数。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c248c85cb2f8b823.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-884193a9bf71d988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>不应该被重载：逻辑与、或运算符，逗号运算符；&amp;&amp;和||；不重载逗号运算符和取地址运算符。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c4c33f0322328477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-07bf05f13eb9be3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>重载的赋值运算应该继承而非违背其内置版本的含义。</p>
+<p><strong>选择作为成员或者非成员</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-680ddb27bec9c57b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>如果我们想提供含有类对象的混合类型表达式，则运算符必须定义成非成员函数。它的左侧运算对象必须是运算符所属类的一个对象。</p>
+<p><strong>14.2输入和输出运算符</strong></p>
+<p>输入输出运算符是非成员函数</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d8edf1521834a41f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-297c4ca573082412.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.3算术和关系运算符</strong></p>
+<p><strong>14.3.1相等运算符设计准则</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-84b83790e433707b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.3.2关系运算符设计准则</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-53ab0bedf5330bf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.5下标运算符</strong></p>
+<p>必须是成员函数</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-836b75ece8498410.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.6递增和递减运算符</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7f65931bf8e43a1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>前置++i</strong>；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-947ba5a54cbf3408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>后置**</strong>i++**</p>
+<p>接受一个额外的（不被使用）int类型的形参，编译器会提供0</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-fd798382377834bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.7成员访问运算符</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-35c669beb2361ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.8函数调用运算符</strong></p>
+<p>定义了调用运算符，则该类的对象称作函数对象。可以调用这种对象，“行为像函数一样”。</p>
+<p><strong>14.8.1lambda是函数对象</strong></p>
+<p>….</p>
+<p><strong>14.8.2标准库定义的函数对象</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4556e96d6cfaaef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.8.3可调用对象与function</strong></p>
+<p>标准库function类型</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-83b52ee0eb2ce7b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-78d394c1e9161e7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d862ecba8f5c531b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>重载的函数与**</strong>function**</p>
+<p>不能（直接）将重载的函数名字存入function类型的对象中，以免二义性，解决途径是存储函数指针。</p>
+<p><strong>14.9重载、类型转换和运算符（还未get到点）</strong></p>
+<p><strong>14.9.1类型转换运算符</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1ed9a61e4452178f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>可以面向任意类型（void除外）进行定义，不允许转换成数组或者函数类型，但允许转换成指针（包括数组指针及函数指针）或者引用类型。必须定义成类的成员函数，通常不应该改变转换对象的内容，一般定义成const成员。</p>
+<p>显示的类型转换运算符（explicit），一般要通过显示的强制类型转换。但存在一个例外，就是表达式被用作条件，以下表达式出现下列位置时，会隐式的执行转换。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1319b7f1bf011ffb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.9.2避免有二义性的类型转换</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-939d59553ab27497.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1551250573ae0e30.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>14.9.3函数匹配与重载运算符</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-92e4d7575612575d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a168454852b1fd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/guigui51.github.io/2018/09/01/13拷贝控制/" rel="next" title="13拷贝控制">
+                <i class="fa fa-chevron-left"></i> 13拷贝控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/guigui51.github.io/2018/09/01/15面向对象程序设计/" rel="prev" title="15面向对象程序设计">
+                15面向对象程序设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">龟龟</p>
+              <p class="site-description motion-element" itemprop="description">一些关于敲代码的事儿</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/guigui51.github.io/archives">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/guigui51.github.io/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#14重载运算与类型转换"><span class="nav-number">1.</span> <span class="nav-text">14重载运算与类型转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">龟龟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/guigui51.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/guigui51.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

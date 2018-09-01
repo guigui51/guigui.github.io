@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/guigui51.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/guigui51.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/guigui51.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/guigui51.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/guigui51.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/guigui51.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/guigui51.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="13拷贝控制13拷贝控制 13.1拷贝、赋值与销毁 13.1.1拷贝构造函数    拷贝构造函数的第一个参数必须是引用类型。 使用拷贝初始化时，我们要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的画还要进行类型转换。    在函数调用过程中，具有非引用类型的参数要进行拷贝初始化。拷贝构造函数被用来初始化非引用类型参数。 我们使用explicit就不要考虑是拷贝初始化还是直接初始化了。 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13拷贝控制">
+<meta property="og:url" content="http://wuyang51.space/2018/09/01/13拷贝控制/index.html">
+<meta property="og:site_name" content="龟龟的搬砖之路">
+<meta property="og:description" content="13拷贝控制13拷贝控制 13.1拷贝、赋值与销毁 13.1.1拷贝构造函数    拷贝构造函数的第一个参数必须是引用类型。 使用拷贝初始化时，我们要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的画还要进行类型转换。    在函数调用过程中，具有非引用类型的参数要进行拷贝初始化。拷贝构造函数被用来初始化非引用类型参数。 我们使用explicit就不要考虑是拷贝初始化还是直接初始化了。 1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-33f0abd8922ab3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-7110505e76359fa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-26d35b46a57a618b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-60691b4be4d34dfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-667f230a09f8af42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-828c3b9bdd1e5f24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-1586e3d9cb41c9d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-7008889c2994540d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-53864437d1cb0c6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-57d5b4c401a65cfa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-37c70a153fd088da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-15554a5087fdbdb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-039df0e36828c8ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-ea81ce512bf24b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-3c207f3029483a6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-9d1f6e2be3e921c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-9b74324964eb0839.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-cf2b1d40fcd56959.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-043e22193fbfd9b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-8f8b243adb018f92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-ca995cdfc0c009ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-e40ea208d82e65fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-dad351d9fdba154f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-58c631848f77b147.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-76e43745361b789e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-bbc465e0a9e9d49c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-cc4e41cbd453aa80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-644e2e29c92b6073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-931d86d66eacb98b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-2bc88bed303a217f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-2d459dbd139f1020.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-eb2ca30a919372d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-01T14:19:37.134Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="13拷贝控制">
+<meta name="twitter:description" content="13拷贝控制13拷贝控制 13.1拷贝、赋值与销毁 13.1.1拷贝构造函数    拷贝构造函数的第一个参数必须是引用类型。 使用拷贝初始化时，我们要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的画还要进行类型转换。    在函数调用过程中，具有非引用类型的参数要进行拷贝初始化。拷贝构造函数被用来初始化非引用类型参数。 我们使用explicit就不要考虑是拷贝初始化还是直接初始化了。 1">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8542527-33f0abd8922ab3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/guigui51.github.io/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wuyang51.space/2018/09/01/13拷贝控制/"/>
+
+
+
+
+
+  <title>13拷贝控制 | 龟龟的搬砖之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/guigui51.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">龟龟的搬砖之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">fighting</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/guigui51.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/guigui51.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/guigui51.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-文章分类">
+          <a href="/guigui51.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文章分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-文章列表">
+          <a href="/guigui51.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wuyang51.space/guigui51.github.io/2018/09/01/13拷贝控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="龟龟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/guigui51.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="龟龟的搬砖之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">13拷贝控制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-01T22:19:36+08:00">
+                2018-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="13拷贝控制"><a href="#13拷贝控制" class="headerlink" title="13拷贝控制"></a>13拷贝控制</h1><p><strong>13拷贝控制</strong></p>
+<p><strong>13.1拷贝、赋值与销毁</strong></p>
+<p><strong>13.1.1拷贝构造函数</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-33f0abd8922ab3d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>拷贝构造函数的第一个参数必须是引用类型。</p>
+<p>使用拷贝初始化时，我们要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的画还要进行类型转换。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7110505e76359fa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>在函数调用过程中，具有非引用类型的参数要进行拷贝初始化。拷贝构造函数被用来初始化非引用类型参数。</p>
+<p>我们使用explicit就不要考虑是拷贝初始化还是直接初始化了。</p>
+<p><strong>13.1.2拷贝赋值运算符</strong></p>
+<p>如果运算符是一个成员函数，其左侧运算对象就绑定到隐式的this参数。右侧运算对象作为显示参数传递。赋值运算符应该返回一个指向左侧运算对象的引用。</p>
+<p><strong>13.1.3析构函数</strong></p>
+<p>构造函数初始化对象的非static数据成员；析构函数释放对象使用的资源，并销毁对象的非static数据成员。对一个给定类只会有唯一一个析构函数。</p>
+<p>在一个析构函数中，首先执行函数体，然后销毁成员。成员按初始化顺序的<strong>逆序</strong>销毁。析构函数释放对象在生存期分配的所有资源。</p>
+<p>隐式销毁一个内置指针类型成员不会delete它所指向的对象。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-26d35b46a57a618b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.1.4三五法则</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-60691b4be4d34dfe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-667f230a09f8af42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>需要拷贝操作的类也需要赋值操作，反之亦然</strong>。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-828c3b9bdd1e5f24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.1.5使用=default</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1586e3d9cb41c9d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-7008889c2994540d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.1.6阻止拷贝</strong></p>
+<p>为什么拷贝、赋值、销毁的合成版本会阻止其操作？</p>
+<p>对某些类来说，这些操作没有合理的意义，所以得采用某种机制阻止拷贝或赋值。例如iostream类阻止了拷贝。</p>
+<p><strong>定义删除的函数</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-53864437d1cb0c6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-57d5b4c401a65cfa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>析构函数不能是删除的成员，可定义，但带来的后果是灾难性的。</p>
+<p><strong>合成的拷贝控制成员可能是删除的。</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-37c70a153fd088da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-15554a5087fdbdb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-039df0e36828c8ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ea81ce512bf24b1d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.2拷贝控制和资源管理</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-3c207f3029483a6a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.2.1行为像值的类</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9d1f6e2be3e921c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9b74324964eb0839.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.2.2行为像指针的类</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cf2b1d40fcd56959.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>定义引用计数来决定什么时候delete。将计算器保存在动态内存中。</p>
+<p><strong>13.3交换操作</strong></p>
+<p>底层利用std：：swap交换</p>
+<p><strong>在赋值运算符中使用swap</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-043e22193fbfd9b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8f8b243adb018f92.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.6对象移动</strong></p>
+<p>某些情况下通过对象移动能够“拷贝、赋值”能够节省很多资源。</p>
+<p><strong>13.6.1右值引用&amp;&amp;</strong></p>
+<p>右值引用必须绑定到右值的引用，利用&amp;&amp;来获得右值引用。</p>
+<p>左值=右值；一个左值表达式表示的是一个对象的身份（地址），而右值表达式表示的是对象的值。</p>
+<p>常规引用为<strong>左值引用。</strong>不能将其绑定到要求转换的表达式、字面常量或是返回右值的表达式。</p>
+<p>右值引用也不过是对象的另一个名字而已，可以绑定到左值引用不能绑定的对象上，但是不能将一个右值引用直接绑定到一个左值上。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ca995cdfc0c009ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>左值持久；右值短暂</strong></p>
+<p>左值具有持久的状态，而右值要么是字面常量，要么是在表达式求值过程中创建的临时对象。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e40ea208d82e65fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.6.2移动构造函数和移动赋值运算符</strong></p>
+<p>移动构造函数第一个参数是该类的一个右值引用。直接移动，然后在析构实参。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-dad351d9fdba154f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>noexcept（通知标准库不抛出任何异常），必须在头文件的声明中和定义中（如果定义在类外）都指定noexcept。</p>
+<p>移动构造函数不分配任何新内存。</p>
+<p>移动赋值运算符是先清空本身，在移动，在析构实参。</p>
+<p>与拷贝操作不同，移动操作用于不会隐式定义为删除的函数。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-58c631848f77b147.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-76e43745361b789e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>用拷贝构造函数代替移动构造函数几乎肯定是安全的（赋值也是如此）。</p>
+<p><strong>移动右值拷贝左值，但如果没有移动构造函数，右值也被拷贝。</strong></p>
+<p><strong>移动迭代器</strong></p>
+<p>一个迭代器一般解引用运算符返回一个指向元素的左值。而移动迭代器的解引用运算符生成有个<strong>右值引用。</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-bbc465e0a9e9d49c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cc4e41cbd453aa80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-644e2e29c92b6073.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-931d86d66eacb98b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>13.6.3右值引用和成员函数</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2bc88bed303a217f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>实参类型决定了新元素是拷贝还是移动到容器中。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-2d459dbd139f1020.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-eb2ca30a919372d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/guigui51.github.io/2018/09/01/12动态内存/" rel="next" title="12动态内存">
+                <i class="fa fa-chevron-left"></i> 12动态内存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/guigui51.github.io/2018/09/01/14重载运算与类型转换/" rel="prev" title="14重载运算与类型转换">
+                14重载运算与类型转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">龟龟</p>
+              <p class="site-description motion-element" itemprop="description">一些关于敲代码的事儿</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/guigui51.github.io/archives">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/guigui51.github.io/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#13拷贝控制"><span class="nav-number">1.</span> <span class="nav-text">13拷贝控制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">龟龟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/guigui51.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/guigui51.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

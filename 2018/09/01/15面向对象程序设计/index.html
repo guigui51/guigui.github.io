@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/guigui51.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/guigui51.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/guigui51.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/guigui51.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/guigui51.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/guigui51.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/guigui51.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="15面向对象程序设计15面向对象程序设计 三个基本概念：数据抽象、继承和动态绑定。    15.1oop：概述       虚函数virtual：不继承基类，基类有，希望派生类定义自身的版本。为了显示表明派生类改写了基类的虚函数在该函数的形参之后增加一个override。 派生列表：    动态绑定：根据实参选择合适的函数版本（基类还是派生类的）进行执行，又称运行时绑定。    15.2定义基类和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15面向对象程序设计">
+<meta property="og:url" content="http://wuyang51.space/2018/09/01/15面向对象程序设计/index.html">
+<meta property="og:site_name" content="龟龟的搬砖之路">
+<meta property="og:description" content="15面向对象程序设计15面向对象程序设计 三个基本概念：数据抽象、继承和动态绑定。    15.1oop：概述       虚函数virtual：不继承基类，基类有，希望派生类定义自身的版本。为了显示表明派生类改写了基类的虚函数在该函数的形参之后增加一个override。 派生列表：    动态绑定：根据实参选择合适的函数版本（基类还是派生类的）进行执行，又称运行时绑定。    15.2定义基类和">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-9a225e6c287a88e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-c66cf71ef85616e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-b74d2836daec9991.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-6d667768df6e4683.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-bcd184999aa223b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-51267b52e0c5ff54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-df2f1019a9942082.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-26c4fc3dfcca0560.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-594cf895ec12446b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-1d0e33e2abf60cb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-d1034141dddee434.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-f8f591341d0ea69c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-aca0890eddbe32e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-0497213021d5e06f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-ff5db83ec82cc471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-06204c36277e56f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-46a899e5cbe3605c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-b0cb4ac025fccd3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-9da1b4a4a8a4bd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-c304c9dac450f901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-8ff211f3fa8b8e0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-dc55c99d2ff20aff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-b2501ed2e012808d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-76ee4010b07b89d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-565010f5675e5fdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-8dd74815b8f5ba80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-63779eeaa4933dd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-281027d42a508630.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-94cbce60bbc06a16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-feceb03f2d48af54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-b04cee8b5dcb1d79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-55a9e567bba98f01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-e5247d6edcfdf3d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-29286b87cf121f1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-1237a47e599372b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-a31f3ad05216d4fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-96f0d3054e69a084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-c811cbadb712a5a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-8a2338dc53832cf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-4bbb97e1d10d9b2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-8a5e989fbbe5ffe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-f76798b547eac8d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-adff436731c8d972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-f8a0507bb3be1adc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-e307503a4ee49146.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-43888994c5fd50c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-b1d941465dd22a83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-da281b65429db9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-cf18e5201e74fc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-e1eb2e97332826e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-9ac36d8caf440b26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-0aefecfe37d636a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8542527-577046a62f78cb24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-01T14:20:58.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="15面向对象程序设计">
+<meta name="twitter:description" content="15面向对象程序设计15面向对象程序设计 三个基本概念：数据抽象、继承和动态绑定。    15.1oop：概述       虚函数virtual：不继承基类，基类有，希望派生类定义自身的版本。为了显示表明派生类改写了基类的虚函数在该函数的形参之后增加一个override。 派生列表：    动态绑定：根据实参选择合适的函数版本（基类还是派生类的）进行执行，又称运行时绑定。    15.2定义基类和">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8542527-9a225e6c287a88e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/guigui51.github.io/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://wuyang51.space/2018/09/01/15面向对象程序设计/"/>
+
+
+
+
+
+  <title>15面向对象程序设计 | 龟龟的搬砖之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/guigui51.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">龟龟的搬砖之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">fighting</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/guigui51.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于">
+          <a href="/guigui51.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/guigui51.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-文章分类">
+          <a href="/guigui51.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            文章分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-文章列表">
+          <a href="/guigui51.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            文章列表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wuyang51.space/guigui51.github.io/2018/09/01/15面向对象程序设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="龟龟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/guigui51.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="龟龟的搬砖之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">15面向对象程序设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-01T22:20:50+08:00">
+                2018-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="15面向对象程序设计"><a href="#15面向对象程序设计" class="headerlink" title="15面向对象程序设计"></a>15面向对象程序设计</h1><p><strong>15面向对象程序设计</strong></p>
+<p>三个基本概念：数据抽象、继承和动态绑定。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9a225e6c287a88e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.1oop：概述</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c66cf71ef85616e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b74d2836daec9991.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>虚函数virtual：不继承基类，基类有，希望派生类定义自身的版本。为了显示表明派生类改写了基类的虚函数在该函数的形参之后增加一个override。</p>
+<p>派生列表：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-6d667768df6e4683.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>动态绑定：根据实参选择合适的函数版本（基类还是派生类的）进行执行，又称运行时绑定。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-bcd184999aa223b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.2定义基类和派生类</strong></p>
+<p><strong>15.2.1定义基类</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-51267b52e0c5ff54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-df2f1019a9942082.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>前者定义为虚函数，</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-26c4fc3dfcca0560.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-594cf895ec12446b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1d0e33e2abf60cb7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>派生类的其他用户是不能访问受保护的，只能派生类自己能够访问。</p>
+<p><strong>15.2.2定义派生类</strong></p>
+<p>派生列表，表明从哪继承，访问说明符是什么。访问说明符控制派生类从基类继承而来的成员是否对派生类的用户可见。</p>
+<p>单继承。</p>
+<p>通过在形参后增加override来表明覆盖基类的哪个虚函数。</p>
+<p><strong>派生类对象及派生类向基类的类型转换</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-d1034141dddee434.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f8f591341d0ea69c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>城派生类到基类的类型转换。</p>
+<p><strong>派生类构造函数</strong></p>
+<p>基类中有的成员使用基类的构造函数初始化，派生类的自己初始化</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-aca0890eddbe32e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0497213021d5e06f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-ff5db83ec82cc471.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-06204c36277e56f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>被用作基类的类</strong></p>
+<p>必须依据定义而非仅声明；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-46a899e5cbe3605c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>一个类可以是基类也可以是派生类。</p>
+<p><strong>防止继承的发生**</strong>final**</p>
+<p>在类名后加一个final。</p>
+<p><strong>15.2.3类型转换与继承</strong></p>
+<p>基类的指针或引用绑定到派生类对象上</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b0cb4ac025fccd3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>静态类型和动态类型</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9da1b4a4a8a4bd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c304c9dac450f901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>在对象之间不存在类型转换</strong></p>
+<p>派生类向基类的自动类型转换只对指针或引用类型有效，在派生类类型和基类类型之中不存在这样的转换。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8ff211f3fa8b8e0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.3虚函数</strong></p>
+<p>使用基类的引用或指针调用一个虚成员函数时会执行动态绑定，所有虚函数都必须定义。必须为每一个虚函数提供定义，而不管它是否被用到了，因为编译器也无法确定到底会使用哪个虚函数。</p>
+<p><strong>对虚函数的调用可能在运行是才被解析</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-dc55c99d2ff20aff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>派生类中虚函数</strong></p>
+<p>Virtual，一旦某个函数被声明成虚函数，则在所以的派生类中它都是虚函数。派生类中虚函数的形参必须与基类一致；返回类型也必须一致，例外情况：返回类型是类本身的指针或引用时。</p>
+<p><strong>Final和override</strong></p>
+<p>派生类定义了一个函数与基类虚函数名字相同但是形参列表不同，这是合法的，两个函数是相互独立的。</p>
+<p>将某个函数指定为final（也可以用于函数），之后任何尝试覆盖该函数的操作都将引发错误。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b2501ed2e012808d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>回避虚函数机制</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-76ee4010b07b89d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-565010f5675e5fdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.4抽象基类</strong></p>
+<p><strong>纯虚函数</strong></p>
+<p>在函数体的位置（声明语句；之前）书写=0，说明此函数没有实际意义，无序定义。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8dd74815b8f5ba80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-63779eeaa4933dd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-281027d42a508630.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-94cbce60bbc06a16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>其派生类可以创建对象。</p>
+<p><strong>派生类构造函数只初始化它的直接基类。</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-feceb03f2d48af54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>disc_quot是抽象基类。</p>
+<p><strong>15.5访问控制与继承</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b04cee8b5dcb1d79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-55a9e567bba98f01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e5247d6edcfdf3d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-29286b87cf121f1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-1237a47e599372b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-a31f3ad05216d4fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-96f0d3054e69a084.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>友元与继承</strong></p>
+<p>友元关系不能传递也不能继承，派生类的友元也不能随意访问基类的成员；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-c811cbadb712a5a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>改变个别成员的可访问行</strong></p>
+<p>采用using声明。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8a2338dc53832cf6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.6继承中的类作用域</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-4bbb97e1d10d9b2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>在编译时进行名字查找</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-8a5e989fbbe5ffe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>通过作用域运算符来使用隐藏的成员</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f76798b547eac8d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>一如往常，名字查找优先于类型检查</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-adff436731c8d972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>隐藏了就不能用了</p>
+<p><strong>覆盖重载的函数</strong></p>
+<p>如果派生类希望所有重载版本对他来说都是可见的，那么它就需要覆盖所有的版本，或者一个也不覆盖。</p>
+<p><strong>15.7构造函数与拷贝控制</strong></p>
+<p><strong>15.7.1虚析构函数</strong></p>
+<p>我们通过在基类中将析构函数定义成虚函数以确保执行正确的析构函数版本。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-f8a0507bb3be1adc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e307503a4ee49146.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.7.2合成拷贝控制与继承</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-43888994c5fd50c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-b1d941465dd22a83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>15.7.4继承的构造函数</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-da281b65429db9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><strong>继承的构造函数的特点</strong></p>
+<p>一个using声明不会改变该构造函数的访问级别</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-cf18e5201e74fc9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-e1eb2e97332826e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p>大多数派生类会继承所有基类的构造函数，两个例外情况，（1）派生类可以继承一部分构造函数，而为其他构造函数定义自己的版本。（2）是默认、拷贝和移动构造函数不会被继承。这些构造函数按照正常规则被合成。</p>
+<p><strong>15.8容器与继承</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-9ac36d8caf440b26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-0aefecfe37d636a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="">  </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8542527-577046a62f78cb24.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/guigui51.github.io/2018/09/01/14重载运算与类型转换/" rel="next" title="14重载运算与类型转换">
+                <i class="fa fa-chevron-left"></i> 14重载运算与类型转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/guigui51.github.io/2018/09/01/16模板与泛形编程/" rel="prev" title="16模板与泛形编程">
+                16模板与泛形编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">龟龟</p>
+              <p class="site-description motion-element" itemprop="description">一些关于敲代码的事儿</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/guigui51.github.io/archives">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/guigui51.github.io/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#15面向对象程序设计"><span class="nav-number">1.</span> <span class="nav-text">15面向对象程序设计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">龟龟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/guigui51.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/guigui51.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/guigui51.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/guigui51.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
